@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text to Speech Converter</title>
+    <link rel="stylesheet"  href="static/style.css">
+   
+</head>
+<body>
+    <h1>Text to Speech Converter</h1>
+    <form id="textToSpeechForm">
+        <textarea id="inputText" rows="25" cols="250" placeholder="Enter text..."></textarea>
+        
+        <!-- Create a container for language and button in line -->
+        <div id="languageAndButtonContainer">
+            <select id="language">
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+                <option value="bn">Bengali</option>
+            </select>
+            <button type="button" id="convertButton" onclick="convertToSpeech()">Convert</button>
+        </div>
+    </form>
+    <!-- Add the download-link class to the anchor tag -->
+    <a id="downloadLink" class="download-link" style="display: none;" download="output.mp3" href="#">Download Audio</a>
+
+    <script>
+        function convertToSpeech() {
+            const inputText = document.getElementById('inputText').value;
+            const language = document.getElementById('language').value;
+
+            fetch('/convert', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: inputText, lang: language }),
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    return response.blob();
+                } else {
+                    throw new Error('Conversion failed');
+                }
+            })
+            .then(data => {
+                const blob = new Blob([data], { type: 'audio/mpeg' });
+                const audioUrl = URL.createObjectURL(blob);
+
+                const downloadLink = document.getElementById('downloadLink');
+                downloadLink.style.display = 'block';
+                downloadLink.href = audioUrl;
+                
+                // Add a class to change the color when clicked
+                downloadLink.classList.add('download-link-clicked');
+                
+                // Remove the class after a short delay to reset the color
+                setTimeout(() => {
+                    downloadLink.classList.remove('download-link-clicked');
+                }, 1000);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+body{
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: flex-start;
+height: 100vh;
+margin: 0;
+}
+
+h1 {
+text-align: center;
+margin-top: 20px;
+color:rgba(24, 24, 112, 0.858); 
+font-family:'Times New Roman';
+font-size: 60px;
+}
+
+#textToSpeechForm {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+width: 100%;
+max-width: 400px;
+margin-top: 20px; 
+}
+
+#inputText {
+width: 800px;
+height: 40vh;
+margin-bottom: 10px;
+border: 2px solid gray;
+border-radius: 10px;
+box-shadow: 10px 8px 6px 10px rgb(198, 189, 189);
+}
+::placeholder{
+text-align: center;
+padding-top: 100px;
+}
+
+
+.download-link {
+color: blue; 
+text-decoration: none;
+margin-top: 30px; 
+transition: color 0.3s;
+font-size: 25px;
+border: 2px solid black;
+border-radius: 8px;
+padding: 5px;
+}
+.download-link:hover{
+    color: aqua;
+    border-color: brown;
+
+}
+
+#convertButton {
+width: 35%;
+height: 30px;
+margin-top: 30px; 
+border: 1px solid black;
+border-radius: 12px;
+cursor: pointer;
+background-color: bisque;
+}
+#convertButton:hover{
+border: 2px solid brown;
+}
+#language {
+width: 50%;
+height: 30px; 
+margin-right: 5px; 
+margin-top: 30px;
+border: 1px solid black;
+border-radius: 12px;
+background-color: rgb(176, 220, 222);
+}
+#language:hover{
+border: 2px solid rgb(63, 116, 93);
+}
+
+#languageAndButtonContainer {
+display: flex;
+justify-content: space-between; 
+width: 100%;
+}
